@@ -192,7 +192,7 @@ async def dingtalk_webhook(request: Request):
 
 ## 6. Configuration
 
-Add the following to your `.env` (see `.env.example` for the full template):
+Add the following to your `.env`. These bot-specific keys are not currently listed in `.env.example`, so treat this section as the reference template for bot setup:
 
 ```dotenv
 # --- Bot general ---
@@ -226,7 +226,7 @@ TELEGRAM_WEBHOOK_SECRET=      # Webhook secret token
 
 1. Create a new file in `bot/platforms/`.
 2. Subclass `BotPlatform` and implement `verify_request`, `parse_message`, `format_response`.
-3. Register a webhook endpoint in `api/v1/router.py`.
+3. Mount the webhook route directly in your FastAPI app (for example in `api/app.py`) instead of `api/v1/router.py`, so the callback path stays `/bot/<platform>` rather than `/api/v1/bot/<platform>`.
 
 ### Adding a new command
 
